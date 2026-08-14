@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "rolodex-h264",
+  "workers_dev": false,
+  "preview_urls": false,
+  "main": "build/worker/shim.mjs",
+  "compatibility_date": "2026-08-01",
+  "limits": {
+    "subrequests": 10000
+  },
+  "build": {
+    "command": "./scripts/build-worker.sh",
+    "watch_dir": ["src"]
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "rolodex-recordings"
+    }
+  ],
+  "queues": {
+    "consumers": [
+      {
+        "queue": "rolodex-jobs",
+        "max_batch_size": 1,
+        "max_batch_timeout": 5,
+        "max_retries": 5,
+        "dead_letter_queue": "rolodex-dead-letter",
+        "max_concurrency": 1,
+        "retry_delay": 30
+      }
+    ]
+  },
+  "vars": {
+    "SOURCE_PREFIX": "recordings/",
+    "ARTIFACT_PREFIX": "artifacts/",
+    "INIT_PREFIX": "init/",
+    "MAX_WIDTH": "480",
+    "MAX_HEIGHT": "270",
+    "JPEG_QUALITY": "78",
+    "THUMBNAIL_INTERVAL": "10s",
+    "MAX_THUMBNAIL_FRAMES": "1000",
+    "MAX_SPRITE_PIXELS": "20000000",
+    "INITIAL_READ_BYTES": "262144",
+    "FULL_READ_THRESHOLD_BYTES": "16777216",
+    "FRAGMENT_READ_AHEAD_BYTES": "1048576",
+    "MAX_R2_BYTES_PER_JOB": "134217728",
+    "MAX_SAMPLES_DECODED": "100000",
+    "MAX_SAMPLES_EXAMINED": "100000",
+    "MAX_SAMPLES_INDEXED": "1000000",
+    "MAX_PARTS_PER_RECORDING": "5000",
+    "MAX_TOP_LEVEL_BOXES": "20000"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1.0
+  }
+}
