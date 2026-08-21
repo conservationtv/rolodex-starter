@@ -14,8 +14,8 @@ codec-h264 = ["rolodex-core/codec-h264", "rolodex-worker/codec-h264"]
 codec-h265 = ["rolodex-core/codec-h265", "rolodex-worker/codec-h265"]
 
 [dependencies]
-rolodex-core = { git = "https://github.com/conservationtv/rolodex.git", rev = "0fd517008e530e739ed165bdecedb71679fba5f3", default-features = false }
-rolodex-worker = { git = "https://github.com/conservationtv/rolodex.git", rev = "0fd517008e530e739ed165bdecedb71679fba5f3", default-features = false }
+rolodex-core = { git = "https://github.com/conservationtv/rolodex.git", rev = "6baf550c4d492de419376930f56dac3b66006fb9", default-features = false }
+rolodex-worker = { git = "https://github.com/conservationtv/rolodex.git", rev = "6baf550c4d492de419376930f56dac3b66006fb9", default-features = false }
 
 [profile.release]
 codegen-units = 1
