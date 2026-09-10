@@ -46,9 +46,33 @@ rules. Cloudflare rejects overlapping notification rules.
 Recordings must be stored below a stream path, for example
 `recordings/camera-12/2026-08-14_12-00-00.mp4`. Edit resource names, prefixes,
 limits, and thumbnail settings in `wrangler.jsonc` before deployment if needed.
+Keep `vars.SOURCE_BUCKET` equal to the `MEDIA_BUCKET` bucket name; events naming
+a different bucket are ignored.
 Recordings up to 16 MiB are fetched once and shared in memory between indexing
 and thumbnail extraction; larger recordings retain bounded range reads. Adjust
 `FULL_READ_THRESHOLD_BYTES` if your workload needs a different cutoff.
+
+## Retention and archive layout
+
+`RETENTION_SECONDS` defaults explicitly to `"0"` (no manifest retention cutoff).
+Set it to `"86400"` for a rolling 24-hour archive. This prunes manifest references
+during publication, not stored objects. The empty cron list is intentional.
+
+Generated thumbnails now live under `artifacts/media/<stream>/<recording>/`;
+repair fragments live under `repairs/<stream>/<recording>/`. Include those paths
+in any delivery authorization and storage policy, alongside the configured
+artifact, recording, and init prefixes. Repair thresholds are built into the
+processor (6 seconds / 4 MB); there are no extra repair environment variables.
+
+Do not apply a blanket expiry rule to shared init segments or to immutable
+archive pages that may still be referenced. Reclaim unreachable artifacts only
+after checking retained references and allowing a publication/playback grace
+period. The starter does not install lifecycle rules or garbage collection.
+
+Upgrading a version 1 archive replaces its discovery document on publication;
+it does not migrate historical recording indexes automatically. Reprocess
+retained recordings if you need their history in the new archive. Deploy a
+compatible client before publishing version 3 pages.
 
 ## Update Rolodex
 

@@ -10,7 +10,9 @@
   },
   "build": {
     "command": "./scripts/build-worker.sh",
-    "watch_dir": ["src"]
+    "watch_dir": [
+      "src"
+    ]
   },
   "r2_buckets": [
     {
@@ -49,10 +51,15 @@
     "MAX_SAMPLES_EXAMINED": "100000",
     "MAX_SAMPLES_INDEXED": "1000000",
     "MAX_PARTS_PER_RECORDING": "5000",
-    "MAX_TOP_LEVEL_BOXES": "20000"
+    "MAX_TOP_LEVEL_BOXES": "20000",
+    "SOURCE_BUCKET": "rolodex-recordings",
+    "RETENTION_SECONDS": "0"
   },
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1.0
+  },
+  "triggers": {
+    "crons": []
   }
 }
