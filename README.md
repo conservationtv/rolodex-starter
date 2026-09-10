@@ -2,8 +2,13 @@
 
 Deploys the Rolodex recording processor to Cloudflare Workers. It consumes R2
 object-create events through a Queue, indexes completed MediaMTX recordings,
-and writes archive manifests, virtual-HLS metadata, init segments, and thumbnail
-sprites back to R2.
+and writes archive manifests, virtual-HLS metadata, init segments, thumbnail
+sprites, and bounded playback repair fragments back to R2.
+
+The worker prunes expired manifest entries during publication when
+`RETENTION_SECONDS` is set. It does not run scheduled cleanup; configure object
+retention separately for your application. Use a matching Rolodex client for
+version 3 archive pages and playback pieces.
 
 The Worker and processing core are pinned to an exact commit of
 [`conservationtv/rolodex`](https://github.com/conservationtv/rolodex).

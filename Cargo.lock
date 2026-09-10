@@ -435,7 +435,7 @@ dependencies = [
 [[package]]
 name = "rolodex-core"
 version = "0.1.0"
-source = "git+https://github.com/conservationtv/rolodex.git?rev=6baf550c4d492de419376930f56dac3b66006fb9#6baf550c4d492de419376930f56dac3b66006fb9"
+source = "git+https://github.com/conservationtv/rolodex.git?rev=860eb0e6461cc1e1fec4362ca4aaabe38fd526bb#860eb0e6461cc1e1fec4362ca4aaabe38fd526bb"
 dependencies = [
  "async-trait",
  "jpeg-encoder",
@@ -457,12 +457,13 @@ dependencies = [
 [[package]]
 name = "rolodex-worker"
 version = "0.1.0"
-source = "git+https://github.com/conservationtv/rolodex.git?rev=6baf550c4d492de419376930f56dac3b66006fb9#6baf550c4d492de419376930f56dac3b66006fb9"
+source = "git+https://github.com/conservationtv/rolodex.git?rev=860eb0e6461cc1e1fec4362ca4aaabe38fd526bb#860eb0e6461cc1e1fec4362ca4aaabe38fd526bb"
 dependencies = [
  "async-trait",
  "rolodex-core",
  "serde",
  "serde_json",
+ "sha2",
  "worker",
 ]
 

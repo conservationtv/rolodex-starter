@@ -23,4 +23,5 @@ if ! command -v worker-build >/dev/null 2>&1; then
   cargo install --locked worker-build --version 0.8.5
 fi
 
-worker-build --release --no-panic-recovery --no-default-features --features "$codec_feature"
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+worker-build --locked --release --no-panic-recovery --no-default-features --features "$codec_feature"
