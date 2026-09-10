@@ -46,8 +46,10 @@ rules. Cloudflare rejects overlapping notification rules.
 Recordings must be stored below a stream path, for example
 `recordings/camera-12/2026-08-14_12-00-00.mp4`. Edit resource names, prefixes,
 limits, and thumbnail settings in `wrangler.jsonc` before deployment if needed.
-Keep `vars.SOURCE_BUCKET` equal to the `MEDIA_BUCKET` bucket name; events naming
-a different bucket are ignored.
+`MEDIA_BUCKET` selects the bucket used for all reads and writes. The optional
+`SOURCE_BUCKET` variable only filters queue events by their reported bucket
+name; it is omitted by default. If enabled, keep it equal to the bound bucket
+name or valid events will be ignored.
 Recordings up to 16 MiB are fetched once and shared in memory between indexing
 and thumbnail extraction; larger recordings retain bounded range reads. Adjust
 `FULL_READ_THRESHOLD_BYTES` if your workload needs a different cutoff.

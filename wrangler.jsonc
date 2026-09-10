@@ -52,7 +52,6 @@
     "MAX_SAMPLES_INDEXED": "1000000",
     "MAX_PARTS_PER_RECORDING": "5000",
     "MAX_TOP_LEVEL_BOXES": "20000",
-    "SOURCE_BUCKET": "rolodex-recordings",
     "RETENTION_SECONDS": "0"
   },
   "observability": {
